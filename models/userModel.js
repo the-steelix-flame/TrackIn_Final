@@ -1,5 +1,5 @@
 const db = require("../db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const findUserByEmail = async (uEmail) => {
   const [rows] = await db.query("SELECT * FROM Ogusers WHERE uEmail = ?", [uEmail]);
