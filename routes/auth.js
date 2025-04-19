@@ -31,15 +31,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// Login Logic
-// router.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     failureRedirect: "/login",
-//     failureFlash: true,
-//     successRedirect: "/dashboard",
-//   })
-// );
+
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
@@ -57,12 +49,6 @@ router.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
-
-
-// Dashboard (protected)
-// router.get(`/users/:id`, isLoggedIn, (req, res) => {
-//   res.render("userDash", { user: req.user });
-// });
 
 // Logout
 router.get("/logout", (req, res) => {
