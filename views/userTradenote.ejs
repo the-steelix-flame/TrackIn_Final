@@ -1,12 +1,12 @@
-<% layout('layouts/boilerplate') -%>
-<body class="bg-light">
+<% layout('layouts/boilerplate_Jh') -%>
+<body class="bg-dark" style="min-height: 700px; width: 100%;">
   <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="fw-bold"><%= users.uName %>'s Notes</h2>
+      <h2 class="fw-bold text-white"><%= users.uName %>'s Notes</h2>
     </div>
 
     <!-- Note Add Form -->
-    <div class="card mb-4 shadow-sm">
+    <div class="card mb-4 shadow-sm ">
       <div class="card-header bg-primary text-white">
         Add a New Note
       </div>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <h3 class="fw-bold">All Notes!!</h3>
+    <h3 class="fw-bold text-white">All Notes!!</h3>
     <!-- Notes Display -->
     <% 
       const colors = ['primary', 'success', 'danger', 'warning', 'info', 'secondary'];
@@ -58,3 +58,4 @@
 
   </div>
 </body>
+<br/><br/><br/><br/>

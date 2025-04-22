@@ -1,8 +1,20 @@
-<% layout('layouts/boilerplate') -%>
-<body class="bg-light">
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-      <h1 class="text-center mb-4">Create Account</h1>
+<% layout('layouts/boilerplate_signup') -%>
+<body class="bg-dark">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100 ">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px; border-radius: 12px;">
+      <h1 class="text-center mb-4 fw-bold">
+        <span style="
+          background: linear-gradient(90deg, #27a4fd, #3dc0fd, #9a2efd, #b121ef);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: inline-block;
+          padding: 10px 0;
+          font-weight: bold;
+        ">
+          Create Your Account
+        </span>
+      </h1>
+      
       <form action="/signup" method="POST">
         <div class="mb-3">
           <label for="uName" class="form-label">Username</label>
@@ -23,6 +35,8 @@
       </div>
     </div> 
   </div>
+</body>
+</html>
 
 
 

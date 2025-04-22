@@ -10,7 +10,7 @@
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
-    font-size: 8rem;
+    font-size: 10rem;
     font-weight: bold;
 }
 .gradient-text {
@@ -146,6 +146,8 @@ h3 {
 }
 
 .btn {
+    min-width: 100px; 
+    text-align: center;
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -180,15 +182,17 @@ h3 {
     opacity: 0;
 }
 
+.nav-link.btn:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+    box-shadow: none !important;
+}
+
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+    color: #009FFD;
 }
-
-.btn-primary {
-    background: #00cfff;
-}
-
 
 #features,
 #benefits {
@@ -226,7 +230,7 @@ h3 {
     padding: 20px;
     text-align: left;
     width: 100%;
-    max-width: 300px;
+    max-width: 500px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
 }
@@ -453,7 +457,7 @@ h3 {
     color: grey;
 }
 
-/* Navbar Styling */
+/*Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -468,6 +472,13 @@ h3 {
     width: 100%;
     z-index: 1000;
     transition: background-color 0.5s;
+}
+
+.navbar{
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+
 }
 
 .navbar_sign {
@@ -487,7 +498,7 @@ h3 {
 }
 
 .nav-links {
-    padding-right: 40px;
+    padding-right: 10px;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -505,7 +516,7 @@ h3 {
     color: #27a4fd;
 }
 
-@media (max-width: 880px) {
+/* @media (max-width: 880px) {
     .nav-links {
         display: none;
         flex-direction: column;
@@ -539,7 +550,7 @@ h3 {
     .navbar-toggler {
         display: none;
     }
-}
+} */
 
 .theme-toggle {
     position: absolute;
@@ -679,5 +690,41 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #888; 
+}
+
+
+
+
+.f-info-links a{
+    text-decoration: none;
+    color: #e8e0e0;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-socials i {
+    font-size: 1.6rem;
+    margin-right: 1rem;
+}
+
+.f-info{
+    text-align: center !important;
+    height: 8rem;
+    background-color:#201e1e;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
 }
 

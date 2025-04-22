@@ -1,12 +1,12 @@
-<% layout('layouts/boilerplate') -%>  
-<body class="p-4 bg-light">
+<% layout('layouts/boilerplate_Jh') -%>  
+<body class="p-4 bg-dark">
     <br/><br/>
   <div class="container">
     <br/>
-    <h1 class="mb-5 text-center">Welcome, <%= user.uName %> 👋</h1>
+    <h1 class="mb-5 text-center text-white">Welcome, <%= user.uName %> 👋</h1>
 
     <!-- Create New Trade Button -->
-    <div class="d-flex justify-content-end mb-4">
+    <div class="d-flex justify-content-end mb-4" >
       <a href="/users/<%= user.uId %>/trades/new" class="btn btn-primary px-4">
         + New Trade
       </a>
@@ -68,3 +68,5 @@
   </div>
   <br/>
 </body>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
