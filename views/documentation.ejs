@@ -32,17 +32,21 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1{
-            background: linear-gradient(90deg, #27a4fd, #3dc0fd, #9a2efd, #b121ef); /* Smooth 4-color gradient */
-            -webkit-background-clip: text; 
+        h1 {
+            background: linear-gradient(90deg, #27a4fd, #3dc0fd, #9a2efd, #b121ef);
+            /* Smooth 4-color gradient */
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-bottom: 2px solid #5f37be; /* Adjusted to match the gradient */
+            border-bottom: 2px solid #5f37be;
+            /* Adjusted to match the gradient */
             padding-bottom: 5px;
             margin-bottom: 10px;
         }
+
         h2 {
-            background: linear-gradient(90deg, #27a4fd, #3dc0fd, #9a2efd, #b121ef); /* Smooth 4-color gradient */
-            -webkit-background-clip: text; 
+            background: linear-gradient(90deg, #27a4fd, #3dc0fd, #9a2efd, #b121ef);
+            /* Smooth 4-color gradient */
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             padding-bottom: 5px;
             margin-top: 50px;
@@ -88,6 +92,19 @@
             color: #777;
         }
     </style>
+    <style>
+        .f-info-socials i:hover {
+            color: #38bdf8;
+            /* Sky blue on hover */
+            transform: scale(1.15);
+        }
+
+
+        .f-info-links a:hover {
+            color: #38bdf8;
+        }
+    </style>
+
 <body>
     <header>
         <!-- <nav class="navbar navbar-expand-lg navbar-light bg-blur shadow-sm fixed-top">
@@ -204,10 +221,22 @@
 
         <p><a href="/home" class="btn">🔙 Back to Project</a></p>
 
-        <div class="footer">
-            <p>© 2025 Your Name. All rights reserved.</p>
-        </div>
+
     </div>
+    <footer>
+        <div class="f-info">
+            <div class="f-info-socials">
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+            </div>
+            <div class="f-info-brand">&copy; TrackinTrade Private Limited</div>
+            <div class="f-info-links">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
