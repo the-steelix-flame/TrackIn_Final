@@ -5,7 +5,7 @@ const { isLoggedIn } = require('../middleware.js');
 const router = express.Router({ mergeParams: true });
 const fetch = require("node-fetch");
 
-router.get("/insights", isLoggedIn, async (req, res) => {
+router.get("/insights", async (req, res) => {
   const userId = req.params.user_id; // Use session for logged-in user
 
   try {
@@ -18,7 +18,7 @@ router.get("/insights", isLoggedIn, async (req, res) => {
 
     const aiText = await getAISuggestions(trades);
     // res.json({ success: true, insights: aiText });
-    res.render("aiInsights.ejs",{insights: aiText,userId})
+    res.render("aiInsights.ejs", { insights: aiText, userId })
 
   } catch (err) {
     console.error(err);

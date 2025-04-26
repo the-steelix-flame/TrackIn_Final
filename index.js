@@ -80,7 +80,7 @@ app.use('/users/:user_id/trades', tradeRoutes);
 app.use('/users/:user_id/notes', notesRouter);
 app.use('/users/:user_id/ai', aiRoutes);
 
-app.get('/dashboard', isLoggedIn, (req, res) => {
+app.get('/dashboard', (req, res) => {
     res.render('userDash', { user: req.user });
 });
 
