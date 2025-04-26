@@ -1,4 +1,3 @@
-// app.js or index.js
 require("dotenv").config();
 
 const express = require('express');
@@ -11,54 +10,50 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const db = require('./db');
-const bcrypt = require("bcryptjs");
 const ExpressError = require("./utils/ExpressError.js");
 const middleware = require('./middleware');
 
-// Route files
+// Routes
 const userRoutes = require('./routes/users');
 const tradeRoutes = require('./routes/trades');
 const notesRouter = require('./routes/notes');
 const aiRoutes = require("./routes/ai");
 const { router: authRoutes, isLoggedIn } = require("./routes/auth");
 
-
-
 // Passport config
 require("./config/passport")(passport);
 
-
-// View engine and Middleware
+// View engine
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
-
-// Session & Flash config (use environment variable for secret in production)
+// Session & Flash
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    secret: process.env.SESSION_SECRET || "mysupersecretcode",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,  // more secure
     cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 7 days
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
 };
 app.use(session(sessionOptions));
 app.use(flash());
 
-// Passport Setup
+// Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(middleware.setCurrentUser);
 
-// Flash & user data middleware
+// Flash & Current User Middleware
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
@@ -68,17 +63,14 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/", (req, res) => res.redirect("/home"));
-app.get("/home", (req, res) => res.render("frontpage.ejs"));
-app.get("/documentation", (req, res) => res.render("documentation.ejs"));
-// app.get("/aiInsights", (req, res) => res.redirect("aiInsights.ejs"));
-
-
+app.get("/home", (req, res) => res.render("frontpage"));
+app.get("/documentation", (req, res) => res.render("documentation"));
 
 app.use("/", authRoutes);
-app.use('/users', userRoutes);
-app.use('/users/:user_id/trades', tradeRoutes);
-app.use('/users/:user_id/notes', notesRouter);
-app.use('/users/:user_id/ai', aiRoutes);
+app.use('/users', isLoggedIn, userRoutes);
+app.use('/users/:user_id/trades', isLoggedIn, tradeRoutes);
+app.use('/users/:user_id/notes', isLoggedIn, notesRouter);
+app.use('/users/:user_id/ai', isLoggedIn, aiRoutes);
 
 app.get('/dashboard', isLoggedIn, (req, res) => {
     res.render('userDash', { user: req.user });
@@ -92,10 +84,10 @@ app.all("*", (req, res, next) => {
 // Global Error Handler
 app.use((err, req, res, next) => {
     const { statusCode = 500, message = "Something went wrong" } = err;
-    res.status(statusCode).render("error.ejs", { errorMsg: message, stack: err.stack });
+    res.status(statusCode).render("error", { errorMsg: message, stack: err.stack });
 });
 
 // Start Server
 app.listen(3000, () => {
-    console.log("✅ Server is running on http://localhost:3000");
+    console.log("✅ Server is running at http://localhost:3000");
 });
