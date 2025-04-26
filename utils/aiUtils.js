@@ -43,7 +43,7 @@ Please answer with:
             },
             body: JSON.stringify({
                 model: "openai/gpt-4o",
-                max_tokens: 1024,
+                max_tokens: 400,
                 messages: [
                     {
                         role: "system",
@@ -58,7 +58,7 @@ Please answer with:
         });
 
         const result = await response.json();
-        //console.log("AI API Response:", JSON.stringify(result, null, 2)); // Debug line
+        console.log("AI API Response:", JSON.stringify(result, null, 2)); // Debug line
 
         return result?.choices?.[0]?.message?.content
             .replace(/\*\*(.*?)\*\*/g, '$1') || "No response from AI.";
