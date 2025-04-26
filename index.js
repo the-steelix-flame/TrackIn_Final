@@ -67,12 +67,12 @@ app.get("/home", (req, res) => res.render("frontpage"));
 app.get("/documentation", (req, res) => res.render("documentation"));
 
 app.use("/", authRoutes);
-app.use('/users', userRoutes);
-app.use('/users/:user_id/trades', tradeRoutes);
-app.use('/users/:user_id/notes', notesRouter);
-app.use('/users/:user_id/ai', aiRoutes);
+app.use('/users', isLoggedIn, userRoutes);
+app.use('/users/:user_id/trades', isLoggedIn, tradeRoutes);
+app.use('/users/:user_id/notes', isLoggedIn, notesRouter);
+app.use('/users/:user_id/ai', isLoggedIn, aiRoutes);
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', isLoggedIn, (req, res) => {
     res.render('userDash', { user: req.user });
 });
 

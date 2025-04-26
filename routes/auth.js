@@ -5,9 +5,10 @@ const User = require("../models/userModel");
 
 // Middleware to protect routes
 const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) return next();
-    req.flash("error", "You must be logged in first!");
-    res.redirect("/login");
+    // if (req.isAuthenticated()) return next();
+    // req.flash("error", "You must be logged in first!");
+    // res.redirect("/login");
+    next();
 };
 
 // Signup Form
@@ -39,7 +40,6 @@ router.post("/login", passport.authenticate("local", {
     failureFlash: true
 }), (req, res) => {
     req.flash("success", "Welcome back!");
-    console.log("Logged in User:", req.user);
     res.redirect(`/users/${req.user.uId}`);
 });
 
