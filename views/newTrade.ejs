@@ -141,7 +141,7 @@
       let entryPrice = parseFloat(document.getElementById('enPrice').value) || 0;
       let exitPrice = parseFloat(document.getElementById('exPrice').value) || 0;
       let quantity = parseFloat(document.getElementById('qty').value) || 0;
-      document.getElementById('pro_los').value = (entryPrice - exitPrice) * quantity;
+      document.getElementById('pro_los').value = (exitPrice-entryPrice) * quantity;
     }
   </script>
 </body>

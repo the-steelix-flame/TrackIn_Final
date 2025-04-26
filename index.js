@@ -1,4 +1,5 @@
 // app.js or index.js
+require("dotenv").config();
 
 const express = require('express');
 const app = express();
@@ -12,15 +13,20 @@ const passport = require("passport");
 const db = require('./db');
 const bcrypt = require("bcryptjs");
 const ExpressError = require("./utils/ExpressError.js");
+const middleware = require('./middleware');
 
 // Route files
 const userRoutes = require('./routes/users');
 const tradeRoutes = require('./routes/trades');
 const notesRouter = require('./routes/notes');
+const aiRoutes = require("./routes/ai");
 const { router: authRoutes, isLoggedIn } = require("./routes/auth");
+
+
 
 // Passport config
 require("./config/passport")(passport);
+
 
 // View engine and Middleware
 app.engine('ejs', ejsMate);
@@ -31,6 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
+
 
 // Session & Flash config (use environment variable for secret in production)
 const sessionOptions = {
@@ -49,6 +56,7 @@ app.use(flash());
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(middleware.setCurrentUser);
 
 // Flash & user data middleware
 app.use((req, res, next) => {
@@ -62,11 +70,15 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => res.redirect("/home"));
 app.get("/home", (req, res) => res.render("frontpage.ejs"));
 app.get("/documentation", (req, res) => res.render("documentation.ejs"));
+// app.get("/aiInsights", (req, res) => res.redirect("aiInsights.ejs"));
+
+
 
 app.use("/", authRoutes);
 app.use('/users', userRoutes);
 app.use('/users/:user_id/trades', tradeRoutes);
 app.use('/users/:user_id/notes', notesRouter);
+app.use('/users/:user_id/ai', aiRoutes);
 
 app.get('/dashboard', isLoggedIn, (req, res) => {
     res.render('userDash', { user: req.user });
