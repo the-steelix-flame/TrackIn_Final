@@ -3,10 +3,10 @@ const router = express.Router({ mergeParams: true });
 const db = require('../db');
 const wrapAsync = require('../utils/wrapAsync');
 const ExpressError = require('../utils/ExpressError');
-const {isLoggedIn} = require('../middleware.js');
+const { isLoggedIn } = require('../middleware.js');
 
 // GET all trades for user
-router.get('/',isLoggedIn, wrapAsync(async (req, res) => {
+router.get('/', wrapAsync(async (req, res) => {
     const userId = req.params.user_id;
     const [[user]] = await db.query("SELECT * FROM Ogusers WHERE uId = ?", [userId]);
     if (!user) throw new ExpressError(404, "User not found");
@@ -16,14 +16,14 @@ router.get('/',isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // Form to add new trade
-router.get('/new',isLoggedIn, wrapAsync(async (req, res) => {
+router.get('/new', wrapAsync(async (req, res) => {
     const [[user]] = await db.query("SELECT * FROM Ogusers WHERE uId = ?", [req.params.user_id]);
     if (!user) throw new ExpressError(404, "User not found");
     res.render("newTrade.ejs", { user });
 }));
 
 // CREATE trade
-router.post('/',isLoggedIn, wrapAsync(async (req, res) => {
+router.post('/', wrapAsync(async (req, res) => {
     const { user_id } = req.params;
     let { date, stock, qty, direction, enTime, exTime, enPrice, exPrice, pro_los, enReason, exReason, stoploss, target, market, mistake, finalview } = req.body;
 
@@ -47,7 +47,7 @@ router.post('/',isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // Edit trade form
-router.get('/:tradeid',isLoggedIn, wrapAsync(async (req, res) => {
+router.get('/:tradeid', wrapAsync(async (req, res) => {
     const [[user]] = await db.query("SELECT * FROM Ogusers WHERE uId = ?", [req.params.user_id]);
     const [[trade]] = await db.query("SELECT * FROM trades WHERE tradeid = ?", [req.params.tradeid]);
     if (!user || !trade) throw new ExpressError(404, "User or Trade not found");
@@ -55,7 +55,7 @@ router.get('/:tradeid',isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // UPDATE trade
-router.put('/:tradeid',isLoggedIn, wrapAsync(async (req, res) => {
+router.put('/:tradeid', wrapAsync(async (req, res) => {
     const { user_id, tradeid } = req.params;
     let { date, stock, qty, direction, enTime, exTime, enPrice, exPrice, pro_los, enReason, exReason, stoploss, target, market, mistake, finalview } = req.body;
 
@@ -78,7 +78,7 @@ router.put('/:tradeid',isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // DELETE trade
-router.delete('/:tradeid',isLoggedIn, wrapAsync(async (req, res) => {
+router.delete('/:tradeid', wrapAsync(async (req, res) => {
     const { user_id, tradeid } = req.params;
     const [result] = await db.query('DELETE FROM trades WHERE tradeid = ? AND user_id = ?', [tradeid, user_id]);
     if (result.affectedRows === 0) throw new ExpressError(404, "Trade not found");
