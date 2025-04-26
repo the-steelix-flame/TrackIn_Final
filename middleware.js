@@ -1,10 +1,11 @@
 module.exports.isLoggedIn = (req, res, next) => {
-    if (!req.user) {  
+    if (!req.query.userId) {
         req.flash("error", "You must be logged in!!");
         return res.redirect("/login");
     }
     next();
 };
+
 
 
 module.exports.setCurrentUser = (req, res, next) => {
