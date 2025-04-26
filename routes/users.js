@@ -6,13 +6,13 @@ const ExpressError = require('../utils/ExpressError');
 const { isLoggedIn } = require('../middleware.js');
 
 // GET all users
-router.get('/', isLoggedIn, wrapAsync(async (req, res) => {
+router.get('/', wrapAsync(async (req, res) => {
   const [users] = await db.query('SELECT * FROM Ogusers');
   res.json(users);
 }));
 
 
-router.get('/:id', isLoggedIn, wrapAsync(async (req, res) => {
+router.get('/:id', wrapAsync(async (req, res) => {
   const userId = req.params.id;
 
   // Step 1: Check user exists
@@ -52,7 +52,7 @@ router.get('/:id', isLoggedIn, wrapAsync(async (req, res) => {
 
 
 // CREATE user
-router.post('/', isLoggedIn, wrapAsync(async (req, res) => {
+router.post('/', wrapAsync(async (req, res) => {
   const { uName, uEmail, uPass, uNote, totalPL, pTrade, lTrade } = req.body;
   const [result] = await db.query(
     'INSERT INTO Ogusers (uName, uEmail, uPass, uNote, totalPL, pTrade, lTrade) VALUES (?,?,?,?,?,?,?)',
@@ -62,7 +62,7 @@ router.post('/', isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // UPDATE user
-router.put('/:id', isLoggedIn, wrapAsync(async (req, res) => {
+router.put('/:id', wrapAsync(async (req, res) => {
   const userId = req.params.id;
   const { uName, uEmail, uPass, uNote, totalPL, pTrade, lTrade } = req.body;
   await db.query(
@@ -73,7 +73,7 @@ router.put('/:id', isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // DELETE user and trades
-router.delete('/:id', isLoggedIn, wrapAsync(async (req, res) => {
+router.delete('/:id', wrapAsync(async (req, res) => {
   const userId = req.params.id;
   await db.query("DELETE FROM trades WHERE user_id = ?", [userId]);
   await db.query("DELETE FROM Ogusers WHERE uId = ?", [userId]);
