@@ -1,7 +1,9 @@
 <% layout('layouts/boilerplate_dash') -%>
 
-  <body style="min-height: 400px; width: 100%; background-color: #1E1F22;">
-    <br /><br />
+  <body
+    style="background: url('/css/imgs/BBACK.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+
+    <br><br><br><br><br><br>
     <div class="container mt-5 " style="height: 500px; width: 100%; padding-top: 80px; padding-bottom: 80px;">
       <div class="text-center mb-5 text-white">
         <h2 class="mb-2">Welcome, <%= user.uName %> 👋</h2>
@@ -39,9 +41,10 @@
         <h5 class="mb-3" style="color: white;">🔍 Quick Actions</h5>
         <div class="d-flex flex-column flex-md-row justify-content-center gap-3" style="padding-bottom: 150px;">
           <a href="/users/<%= user.uId %>/trades" class="btn btn-primary px-4" style="color: black;">Go to Journal</a>
-          <a href="/users/<%= user.uId %>/ai/insights" class="btn btn-secondary px-4" style="color: black;">💡 Get AI
-            Insights</a>
-          <a href="/users/<%= user.uId %>/notes" class="btn btn-success px-4" style="color: black;">Go to Notes</a>
+          <a href="/users/<%= user.uId %>/ai/insights" class="btn btn-outline-light px-4 py-2">
+            💡Get AI Insights
+          </a>
+          <a href="/users/<%= user.uId %>/notes" class="btn btn-outline-light px-4 py-2">Go to Notes</a>
         </div>
       </div>
     </div>
